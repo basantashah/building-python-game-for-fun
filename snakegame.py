@@ -1,5 +1,6 @@
 import turtle
 from time import sleep
+import random
 
 
 # Set up the screen
@@ -19,6 +20,15 @@ head.color("black")
 head.penup()
 head.goto(0,0)
 head.direction = "stop"
+
+# creating sanke food
+
+food = turtle.Turtle()
+food.speed(0)
+food.shape("circle")
+food.color("red")
+food.penup()
+food.goto(0,100)
 
 # create function
 def move():
@@ -43,28 +53,33 @@ def move():
 
 # creating function
 def go_up():
-    head.direction == "up"
+    head.direction = "up"
 
 def go_down():
-    head.direction == "down"
+    head.direction = "down"
 
 def go_left():
-    head.direction == "left"
+    head.direction = "left"
 
 def go_right():
-    head.direction == "right"
+    head.direction = "right"
 
 # keyboard binding
 wn.listen()
 wn.onkeypress(go_up, "w")
-wn.onkeypress(go_down, "z")
+wn.onkeypress(go_down, "s")
 wn.onkeypress(go_left, "a")
 wn.onkeypress(go_right, "d")
 
 # lets create main game loop which keeps running
 while True:
     wn.update()
-    sleep(1)
+    if head.distance(food) < 20:
+        # move the food to random screen
+        x = random.randint(-290, 290)
+        y = random.randint(-290, 290)
+        food.goto(x, y)
+    sleep(0.2)
     move()
 
 
